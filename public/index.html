@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Voting app dev jam</title>
+    <link rel="stylesheet" href="/styles/style.css">
+  </head>
+    <body>
+      <div class="newUser">
+        <h1>CREATE A NEW USER</h1>
+        <div class="inputBlock">
+          <label>First Name</label>
+          <input id="firstName">
+        </div>
+      
+        <div class="inputBlock">
+          <label>Last Name</label>
+          <input id="lastName">
+        </div>
+        <button>Create User</button>
+      </div>
+      
+      <div class="createPoll">
+        <h1>CREATE A NEW POLL</h1>
+      
+        <div class="inputBlock">
+          <label>ID</label>
+          <input id="idNewPoll">
+        </div>
+
+        <div class="inputBlock">
+          <label>Poll Title</label>
+          <input id="pollTitle">
+        </div>
+
+        <div class="pollOpt"></div>
+
+        <button id="addFieldBtn">Add Option</button>
+        <button>Create Poll</button>
+      </div>
+      
+      <div class="idCheck">
+        <h1>ADD ANOTHER POLL WITH THE SAME ID</h1>
+      
+        <div class="inputBlock">
+          <label>ID</label>
+          <input id="id">
+        </div>
+      
+        <div class="inputBlock">
+          <label>Poll Title</label>
+          <input id="pollTitle">
+        </div>
+        <button>Check ID</button>
+      </div>
+  </body>
+  <script type="module" src="/scripts/app.js"></script>
+  <script src="/scripts/addPollField.js"></script>
+</html>
