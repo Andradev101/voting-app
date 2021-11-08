@@ -2,7 +2,7 @@ console.log("aaaa");
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"; 
+import { collection, addDoc, doc, setDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"; 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,7 +27,7 @@ const lName = document.querySelector("#lastName");
 const pollTitle = document.querySelector("#pollTitle");
 //btns
 const newUserAddBtn = document.querySelector("body > div.newUser > button");
-const checkIdBtn = document.querySelector("body > div.idCheck > button")
+const checkIdBtn = document.querySelector("#createPollBtn")
 
 //INSERT DATA
 async function createUser(){
@@ -42,17 +42,48 @@ async function createUser(){
   }
 }
 
+//const userRef = collection(db,"users");
+// db.collection("users").get().then((snapshot) => {
+//   console.log(snapshot.docs);
+// })
+//CHECK UNIQUE KEY
+// const docRef = doc(collection(db, "users"));
+// const docSnap = await getDoc(docRef);
+// console.log(docSnap);
+// if (docSnap.exists()) {
+//   console.log("Document data:", docSnap.data());
+// } else {
+//   // doc.data() will be undefined in this case
+//   console.log("No such document!");
+// }
+
+/******WORKS******
+  const querySnapshot = await getDocs(collection(db, "users"));
+
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data());
+  });
+*/
+
+//CREATE POLL
 async function createPoll(){
+  let userUniqueKey = idNewPoll.value;
   try {
-    const docRef = await addDoc(collection(db, "users"), {
-      id: idNewPoll.value,
-      pollTitle: pollTitle.value,
-      pollOpts: [1,2,3,4,5]
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => { 
+      if(userUniqueKey == doc.id){
+        console.log("doc found: "+ doc.id +" => "+ JSON.stringify(doc.data()));
+      }
     });
-    alert(`Copy this ID: ${docRef.id}`);
+
+    const docRef = await addDoc(collection(db, "users",`${userUniqueKey}`), {
+      pollTitle: pollTitle.value
+    });
+    
   } catch (e) {
     console.error("Error adding document: ", e);
   }
+
 }
 
 //FUNCTIONS
