@@ -2,7 +2,7 @@ console.log("aaaa");
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js";
-import { collection, addDoc, doc, setDoc, getDocs, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"; 
+import { collection, addDoc, doc, setDoc, getDocs, updateDoc, getDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"; 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,17 +20,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
-//HTML ELEMENTS
+/*************************************************************************************************/
 
+//HTML ELEMENTS
 const fName = document.querySelector("#firstName");
 const lName = document.querySelector("#lastName");
 const pollTitle = document.querySelector("#pollTitle");
-const pollOpts = document.querySelector("body > div.createPoll > div.pollOpt")
+const pollOpts = document.querySelector("body > div.createPoll > div.pollOpt");
 //btns
 const newUserAddBtn = document.querySelector("body > div.newUser > button");
-const checkIdBtn = document.querySelector("#createPollBtn")
+const createPollBtn = document.querySelector("#createPollBtn")
+const checkIdBtn = document.querySelector("#checkIdBtn")
 
-//INSERT DATA
+//CREATE USER
 async function createUser(){
   try {
     const docRef = await addDoc(collection(db, "users"), {
@@ -97,18 +99,45 @@ async function createPoll(){
     const getSnap = await getDoc(userRef, { merge: true })
     console.log(getSnap.data());
 
-    await updateDoc(userRef, {
-      polls:[ 
-              {
-                pollTitle: pollTitle.value,
-                opts: options
-              }
-            ]
-    })
+      if (getSnap.exists()) {
+        //search polls
+        // let pollsArr = getSnap.data().polls;
+        // let pollsLength = getSnap.data().polls.length
+        // console.log("polls objects:", pollsArr);
+        // console.log("How many polls:", pollsLength);
+
+        await updateDoc(userRef, {
+          polls:arrayUnion({
+          pollTitle: pollTitle.value,
+          opts: options
+        })
+      })
+    } 
+    //   if(pollsLength > 0){
+    //     //console.log("im in");
+    //     await updateDoc(userRef, {
+    //       polls:arrayUnion({
+    //         pollTitle: pollTitle.value,
+    //         opts: options
+    //       })
+    //     })
+
+    //   }
+    // } else {
+    //   console.log("im in");
+    //   await updateDoc(userRef, {
+    //     polls:[ 
+    //             {
+    //               pollTitle: pollTitle.value,
+    //               opts: options
+    //             }
+    //           ]
+    //   }) 
   } catch (e) {
     console.error("Error adding document: ", e);
   }
 }
+
 //GET POLL OPTIONS
 async function getPollOpts(){
   let pollOptArr=[];
@@ -119,6 +148,26 @@ async function getPollOpts(){
   console.log(pollOptArr);
   return pollOptArr
 }
+
+async function checkId(){
+  const idToCheck = document.querySelector("#id")
+  let userUniqueKey = idToCheck.value;
+  console.log(userUniqueKey);
+
+  const docRef = doc(db, "users", `${userUniqueKey}`)
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Created polls:", docSnap.data().polls.length);
+    for (let i = 0; i < docSnap.data().polls.length; i++) {
+      console.log("Poll title:", docSnap.data().polls[i].pollTitle);
+    }
+    
+  } else {
+    console.log("No such document!");
+  }
+}
 //EVENT LISTENERS
 newUserAddBtn.addEventListener("click", createUser);
-checkIdBtn.addEventListener("click", createPoll);
+createPollBtn.addEventListener("click", createPoll);
+checkIdBtn.addEventListener("click", checkId);
