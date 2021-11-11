@@ -24,43 +24,42 @@ const db = getFirestore();
 // console.log(getSnap.data());
 const contentDiv = document.querySelector("body > div.createdPolls > div");
 
-const q = query(collection(db, "users"));
+const q = query(collection(db, "polls"));
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
-  //console.log(doc.data().polls);
-  for (let i = 0; i < doc.data().polls.length; i++) {
+  let pollTitle = doc.data().pollTitle;
+  //console.log(doc.data());
+  //console.log(pollTitle);
+  let element =
+  `
+  <div class="poll">
+    <h3>${pollTitle}</h3>
+    
+    <form action="">
 
-    let pollTitle = doc.data().polls[i].pollTitle;
-    let element =
+      <button class="voteBtn">Vote</button>
+    </form>
+    <p>Created by: ${doc.data().createdBy}</p>
+  </div>
+  `
+  contentDiv.insertAdjacentHTML("beforeend", element);
+  
+  //get me each opt
+  let optArr = doc.data().opts;
+  let idk = document.querySelectorAll("body > div.createdPolls > div > div > form")
+  // console.log(idk[idk.length- 1]);
+  // console.log(optArr);
+  optArr.forEach(element => {
+    let pollStructure =
     `
-    <div class="poll">
-      <h3>${pollTitle}</h3>
-      
-      <form action="">
-
-        <button>Vote</button>
-      </form>
+    <div class="opt">
+      <input type="radio" id="${element}" name="${element}" value="${element}">
+      <label for="${element}">${element}</label>
     </div>
     `
-    contentDiv.insertAdjacentHTML("beforeend", element);
-    
-    //get me each opt
-    let optArr = doc.data().polls[i].opts;
-    let idk = document.querySelectorAll("body > div.createdPolls > div > div > form")
-    // console.log(idk[idk.length- 1]);
-    // console.log(optArr);
-    optArr.forEach(element => {
-      let pollStructure =
-      `
-      <div class="opt">
-        <input type="radio" id="${element}" name="${element}" value="${element}">
-        <label for="${element}">${element}</label>
-      </div>
-      `
-      idk[idk.length- 1].insertAdjacentHTML("beforeend", pollStructure)
-      //always gets the last index and add the structure to the page
-    })
-  }
+    idk[idk.length- 1].insertAdjacentHTML("beforeend", pollStructure)
+    //always gets the last index and add the structure to the page
+  })
 });
 
 // function addPollFields(querySnapshot) {
