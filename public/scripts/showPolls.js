@@ -27,9 +27,8 @@ const contentDiv = document.querySelector("body > div.createdPolls > div");
 const q = query(collection(db, "polls"));
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
+  
   let pollTitle = doc.data().pollTitle;
-  //console.log(doc.data());
-  //console.log(pollTitle);
   let element =
   `
   <div class="poll">
@@ -37,7 +36,7 @@ querySnapshot.forEach((doc) => {
     
     <form action="">
 
-      <button class="voteBtn">Vote</button>
+      <button class="voteBtn" disabled>Vote</button>
     </form>
     <p>Created by: ${doc.data().createdBy}</p>
   </div>
@@ -46,8 +45,8 @@ querySnapshot.forEach((doc) => {
   
   //get me each opt
   let optArr = doc.data().opts;
-  let idk = document.querySelectorAll("body > div.createdPolls > div > div > form")
-  // console.log(idk[idk.length- 1]);
+  let form = document.querySelectorAll("body > div.createdPolls > div > div > form")
+  // console.log(form[form.length- 1]);
   // console.log(optArr);
   optArr.forEach(element => {
     let pollStructure =
@@ -57,7 +56,7 @@ querySnapshot.forEach((doc) => {
       <label for="${element}">${element}</label>
     </div>
     `
-    idk[idk.length- 1].insertAdjacentHTML("beforeend", pollStructure)
+    form[form.length- 1].insertAdjacentHTML("beforeend", pollStructure)
     //always gets the last index and add the structure to the page
   })
 });
