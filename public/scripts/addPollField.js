@@ -1,6 +1,6 @@
-const createPollDiv = document.querySelector("body > div.createPoll");
-const addFieldBtn = document.querySelector("#addFieldBtn");
-const pollOpt = document.querySelector("body > div.createPoll > div.pollOpt");
+const createPollDiv = document.querySelector("body > div.userInteraction > div.createPoll");
+const addFieldBtn = document.querySelector("#addFieldBtn")
+const pollOpt = document.querySelector("body > div.userInteraction > div.createPoll > div.pollOpt")
 
 let i = 0;
 function createNewField(){

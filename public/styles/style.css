@@ -6,14 +6,20 @@
 body{
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 }
 h1{
     text-align: center;
 }
-.newUser,.idCheck, .createPoll{
+.userInteraction{
+    background-color: #b698ff;;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+.newUser,.idCheck, .createPoll, .loginBox{
     display: flex;
     flex-direction: column;
     justify-content: center;

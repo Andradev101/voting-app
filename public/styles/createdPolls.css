@@ -1,0 +1,28 @@
+.createdPolls{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.poll{
+    display: flex;
+    margin: 5px;
+    width: 200px;
+    background-color: violet;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.poll form{
+    display: flex;
+    flex-direction: column-reverse;
+    /*
+        it is reversed because showPoll.js 
+        idk[idk.length- 1].insertAdjacentHTML("afterbegin", pollStructure)
+    */
+}
+.createdPolls .content{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+}

@@ -26,11 +26,13 @@ const db = getFirestore();
 const fName = document.querySelector("#firstName");
 const lName = document.querySelector("#lastName");
 const pollTitle = document.querySelector("#pollTitle");
-const pollOpts = document.querySelector("body > div.createPoll > div.pollOpt");
+const pollOpts = document.querySelector("body > div.userInteraction > div.createPoll > div.pollOpt");
+
 //btns
-const newUserAddBtn = document.querySelector("body > div.newUser > button");
-const createPollBtn = document.querySelector("#createPollBtn")
-const checkIdBtn = document.querySelector("#checkIdBtn")
+const newUserAddBtn = document.querySelector("body > div.userInteraction > div.newUser > button");
+const createPollBtn = document.querySelector("#createPollBtn");
+const checkIdBtn = document.querySelector("#checkIdBtn");
+const idToCheck = document.querySelector("#id")
 
 //CREATE USER
 async function createUser(){
@@ -66,7 +68,8 @@ async function createUser(){
 //   console.log("No such document!");
 // }
 
-/******WORKS******
+/*
+*****WORKS******
   const querySnapshot = await getDocs(collection(db, "users"));
 
   querySnapshot.forEach((doc) => {
@@ -110,6 +113,7 @@ async function createPoll(){
           polls:arrayUnion({
           pollTitle: pollTitle.value,
           opts: options
+          //comes from getPollOpts()
         })
       })
     } 
@@ -149,8 +153,8 @@ async function getPollOpts(){
   return pollOptArr
 }
 
+//CHECK POLLS CERTAIN USER CREATED
 async function checkId(){
-  const idToCheck = document.querySelector("#id")
   let userUniqueKey = idToCheck.value;
   console.log(userUniqueKey);
 
@@ -162,7 +166,6 @@ async function checkId(){
     for (let i = 0; i < docSnap.data().polls.length; i++) {
       console.log("Poll title:", docSnap.data().polls[i].pollTitle);
     }
-    
   } else {
     console.log("No such document!");
   }

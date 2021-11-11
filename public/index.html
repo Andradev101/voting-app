@@ -5,52 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Voting app dev jam</title>
     <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/createdPolls.css">
   </head>
-    <body>
+  <body>
+      
+    <div class="userInteraction"> 
       <div class="newUser">
         <h1>CREATE A NEW USER</h1>
         <div class="inputBlock">
           <label>First Name</label>
           <input id="firstName">
         </div>
-      
+    
         <div class="inputBlock">
           <label>Last Name</label>
           <input id="lastName">
         </div>
         <button>Create User</button>
       </div>
-      
+    
       <div class="createPoll">
         <h1>CREATE A NEW POLL</h1>
-      
+    
         <div class="inputBlock">
           <label>ID</label>
           <input id="idNewPoll">
         </div>
-
+    
         <div class="inputBlock">
           <label>Poll Title</label>
           <input id="pollTitle">
         </div>
-
+    
         <div class="pollOpt"></div>
-
+    
         <button id="addFieldBtn">Add Option</button>
         <button id="createPollBtn">Create Poll</button>
       </div>
-      
+    
       <div class="idCheck">
         <h1>Check Polls</h1>
-      
+    
         <div class="inputBlock">
           <label>ID</label>
           <input id="id">
         </div>
-        
+    
         <button id="checkIdBtn">Check ID</button>
       </div>
+
+      <div class="loginBox">
+        <label for="login"><h1>Login:</h1></label>
+        <input type="text" name="login" id="login-loginBox" placeholder="Paste your ID here">
+        <button>Login</button>
+        <button>Logout</button>
+      </div>
+
+    </div>
+
+    <div class="createdPolls">
+      <h1>Created Polls</h1>
+      
+      <div class="content">
+      </div>
+
+    </div>
   </body>
   <script type="module" src="/scripts/app.js"></script>
   <script src="/scripts/addPollField.js"></script>
+  <script type="module" src="/scripts/showPolls.js"></script>
 </html>
