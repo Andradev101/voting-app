@@ -19,15 +19,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
+
 const loginInput = document.querySelector("#login-loginBox");
 const loginBtn = document.querySelector("body > div.userInteraction > div.loginBox > button:nth-child(4)");
+const logoutBtn = document.querySelector("body > div.userInteraction > div.loginBox > button:nth-child(5)");
 const voteBtn = document.getElementsByClassName("voteBtn")
 
 loginBtn.addEventListener("click", login)
+logoutBtn.addEventListener("click", logout)
 
 async function login(){
     let userUniqueKey = loginInput.value;
-    console.log(loginInput);
 
     const docRef = doc(db, "users", `${userUniqueKey}`);
     const docSnap = await getDoc(docRef);
@@ -40,6 +42,14 @@ async function login(){
     } else {
       console.log("No such document!");
     }
-    
+}
 
+async function logout(){
+  loginInput.value = "";
+  loginInput.removeAttribute("disabled", "")
+
+  for (let i = 0; i < voteBtn.length; i++) {
+    const element = voteBtn[i];
+    element.setAttribute("disabled", "")
+  }
 }
