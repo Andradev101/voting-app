@@ -37,27 +37,41 @@ let checkExist = setInterval(function() {
     }
  }
  async function vote(element, i) {
-
+    //iterable element
     let pollDivChildren = element[i].children
+    //logged user
+    let loginInput = document.querySelector("#login-loginBox");
+    let userUniqueKey = loginInput.value;
 
-    const loginInput = document.querySelector("#login-loginBox");
-    const userUniqueKey = loginInput.value;
+    //check if user has a vote in tha same poll
 
     //search through chidren until find poll_Id
     //then, gets the inner text value
     for (let i = 0; i < pollDivChildren.length; i++) {
         
         const element = pollDivChildren[i];
+
         if(element.className == "poll_Id"){
             let pollIdResult = element.innerText;
             
             const voteRef = await addDoc(collection(db, "votes"), {
                 voteBy: `${userUniqueKey}`,
                 poll_id: `${pollIdResult}`,
-                vote: "a"
+                vote: `${getPollVoteValue()}`
               });
             console.log("Vote Registered: ", voteRef.id);
         }
     }
 
  }
+
+function getPollVoteValue(){
+    const PollOptions = document.getElementsByName('option');
+
+    for(let i = 0; i < PollOptions.length; i++) {
+        if(PollOptions[i].checked){
+            let voteAnswer = PollOptions[i].value;
+            return voteAnswer;
+        }
+    }
+}
