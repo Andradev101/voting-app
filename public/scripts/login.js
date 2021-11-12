@@ -30,6 +30,7 @@ logoutBtn.addEventListener("click", logout)
 
 async function login(){
     let userUniqueKey = loginInput.value;
+    console.log(loginInput);
 
     const docRef = doc(db, "users", `${userUniqueKey}`);
     const docSnap = await getDoc(docRef);

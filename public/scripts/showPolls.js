@@ -33,12 +33,12 @@ querySnapshot.forEach((doc) => {
   `
   <div class="poll">
     <h3>${pollTitle}</h3>
-    
-    <form action="">
+    <form action="#">
 
-      <button class="voteBtn" disabled>Vote</button>
+      <button type="button" class="voteBtn" disabled>Vote</button>
     </form>
-    <p>Created by: ${doc.data().createdBy}</p>
+    <p>Poll ID:</p>
+    <p class="poll_Id">${doc.id}</p>
   </div>
   `
   contentDiv.insertAdjacentHTML("beforeend", element);
@@ -52,7 +52,7 @@ querySnapshot.forEach((doc) => {
     let pollStructure =
     `
     <div class="opt">
-      <input type="radio" id="${element}" name="${element}" value="${element}">
+      <input type="radio" id="${element}" name="option" value="${element}">
       <label for="${element}">${element}</label>
     </div>
     `
