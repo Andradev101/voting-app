@@ -19,22 +19,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
+/*************************************************************************************************/
+
 // const querySearch = doc(db, "users", "AHCMdGrA6MkTMvshHfzh");
 // const getSnap = await getDoc(querySearch);
 // console.log(getSnap.data());
 const contentDiv = document.querySelector("body > div.createdPolls > div");
 
-const q = query(collection(db, "polls"));
-const querySnapshot = await getDocs(q);
+//get every poll doc, create a html structure to it, and append to the page
+const queryPolls = query(collection(db, "polls"));
+const querySnapshot = await getDocs(queryPolls);
 querySnapshot.forEach((doc) => {
-  
   let pollTitle = doc.data().pollTitle;
   let element =
   `
   <div class="poll">
     <h3>${pollTitle}</h3>
     <form action="#">
-
+    
+      <button type="button" class="showResultsBtn">Show Results</button>
       <button type="button" class="voteBtn" disabled>Vote</button>
     </form>
     <p>Poll ID:</p>
@@ -42,7 +45,8 @@ querySnapshot.forEach((doc) => {
   </div>
   `
   contentDiv.insertAdjacentHTML("beforeend", element);
-  
+
+  //get every option of each poll and add to the specific poll
   //get me each opt
   let optArr = doc.data().opts;
   let form = document.querySelectorAll("body > div.createdPolls > div > div > form")

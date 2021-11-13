@@ -19,19 +19,24 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
+/*************************************************************************************************/
 
+//HTML Elements
 const loginInput = document.querySelector("#login-loginBox");
 const loginBtn = document.querySelector("body > div.userInteraction > div.loginBox > button:nth-child(4)");
 const logoutBtn = document.querySelector("body > div.userInteraction > div.loginBox > button:nth-child(5)");
 const voteBtn = document.getElementsByClassName("voteBtn")
 
+//Event Listeners
 loginBtn.addEventListener("click", login)
 logoutBtn.addEventListener("click", logout)
 
+//Functions
 async function login(){
     let userUniqueKey = loginInput.value;
     console.log(loginInput);
 
+    //search through users
     const docRef = doc(db, "users", `${userUniqueKey}`);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {

@@ -15,10 +15,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
+/*************************************************************************************************/
+
 const voteBtn = document.getElementsByClassName("voteBtn")
 const polls = document.getElementsByClassName("poll")
 console.log(polls);
 
+//check if there is multiple polls div each 500ms, if theres enable the voting
 let checkExist = setInterval(function() {
     if (voteBtn.length) {
        clearInterval(checkExist);
@@ -48,20 +51,22 @@ let checkExist = setInterval(function() {
         const element = pollDivChildren[i];
         if(element.className == "poll_Id"){
             var pollIdResult = element.innerText;
+            //needs to be global
         }
     }
 
-    
+    //check if an user has voted in a certain poll
     const validVoteRef = collection(db, "votes");
     const validVoteQuery = query(validVoteRef, where("voteBy", "==", `${userUniqueKey}`), where("poll_id", "==", `${pollIdResult}`));
     const querySnapshot = await getDocs(validVoteQuery);
     console.log(querySnapshot.docs.length);
 
     //check if user has a vote in the same poll
+    //if yes, vote is interrupted before going to the db
     if (querySnapshot.docs.length > 0) {
         console.log("VOTE DOES NOT COUNT USER ALREADY VOTED");
     }else{
-        //then, gets the inner text value
+        //if no, resgister the vote
         const voteRef = await addDoc(collection(db, "votes"), {
             voteBy: `${userUniqueKey}`,
             poll_id: `${pollIdResult}`,
@@ -103,6 +108,7 @@ let checkExist = setInterval(function() {
     */
  }
 
+//search checked value in the poll and return the value
 function getPollVoteValue(){
     const PollOptions = document.getElementsByName('option');
 

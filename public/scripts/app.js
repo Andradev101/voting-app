@@ -33,6 +33,11 @@ const createPollBtn = document.querySelector("#createPollBtn");
 const checkIdBtn = document.querySelector("#checkIdBtn");
 const idToCheck = document.querySelector("#id")
 
+//EVENT LISTENERS
+newUserAddBtn.addEventListener("click", createUser);
+createPollBtn.addEventListener("click", createPoll);
+checkIdBtn.addEventListener("click", checkId);
+
 //CREATE USER
 async function createUser(){
   try {
@@ -133,8 +138,3 @@ async function checkId(){
     console.log(doc.id, " => ", doc.data());
   });
 }
-
-//EVENT LISTENERS
-newUserAddBtn.addEventListener("click", createUser);
-createPollBtn.addEventListener("click", createPoll);
-checkIdBtn.addEventListener("click", checkId);
