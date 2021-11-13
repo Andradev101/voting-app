@@ -39,33 +39,45 @@ async function getSpecificPollResult(){
         const element = showResultsBtn[i];
         element.addEventListener("click", (event) => {
             event.preventDefault();
-            console.log("aaaa");
+            //console.log("aaaa");
             checkPollRes(polls, i);
         })
     }
 }
-//now i have the specifiv div element
+//now i have the specific div element
 async function checkPollRes(element, i){
     let pollDivChildren = element[i].children
-    console.log(element[i]);
+    
+    //i dont like this [1]
+    //search every opts in certain poll
+    let pollOpts = element[i].children[1].children
+    for (let i = 0; i < pollOpts.length; i++) {
+        const element = pollOpts[i];
+
+        if (element.classList.contains("opt")) {
+            console.log(element.children[1].innerText);
+        }
+    }
+
     for (let i = 0; i < pollDivChildren.length; i++) { 
         const element = pollDivChildren[i];
         if(element.className == "poll_Id"){
             var pollIdResult = element.innerText;
-            console.log(pollIdResult);
+            //console.log(pollIdResult);
         }
     }
     
-    let loginInput = document.querySelector("#login-loginBox");
-    //let userUniqueKey = loginInput.value;
+    //check votes in a specific poll ang log them
     const checkVotes = collection(db, "votes");
     const checkVotesQuery = query(checkVotes, where("poll_id", "==", `${pollIdResult}`));
     const querySnapshot = await getDocs(checkVotesQuery);
-    
+
+    let pollAllVotes = querySnapshot.docs.length;
+    //console.log(pollAllVotes);
+
     for (let i = 0; i < querySnapshot.docs.length; i++) {
         const element = querySnapshot.docs[i];
         console.log(element.data());
+        console.log(element.data().vote);
     }
-}          
-
-
+}

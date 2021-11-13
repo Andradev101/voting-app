@@ -19,7 +19,6 @@ const db = getFirestore();
 
 const voteBtn = document.getElementsByClassName("voteBtn")
 const polls = document.getElementsByClassName("poll")
-console.log(polls);
 
 //check if there is multiple polls div each 500ms, if theres enable the voting
 let checkExist = setInterval(function() {
@@ -64,7 +63,7 @@ let checkExist = setInterval(function() {
     //check if user has a vote in the same poll
     //if yes, vote is interrupted before going to the db
     if (querySnapshot.docs.length > 0) {
-        console.log("VOTE DOES NOT COUNT USER ALREADY VOTED");
+        console.log("VOTE DOES NOT COUNT | USER ALREADY VOTED");
     }else{
         //if no, resgister the vote
         const voteRef = await addDoc(collection(db, "votes"), {
