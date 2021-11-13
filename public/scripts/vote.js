@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js";
-import { collection, addDoc, doc, setDoc, getDocs, updateDoc, getDoc, arrayUnion, query } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"; 
+import { collection, addDoc, doc, setDoc, getDocs, updateDoc, getDoc, arrayUnion, query, where } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js"; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyBMhWYQ75gsw3JO76VvPrjHpBUx6V79124",
@@ -43,26 +43,64 @@ let checkExist = setInterval(function() {
     let loginInput = document.querySelector("#login-loginBox");
     let userUniqueKey = loginInput.value;
 
-    //check if user has a vote in tha same poll
-
     //search through chidren until find poll_Id
-    //then, gets the inner text value
-    for (let i = 0; i < pollDivChildren.length; i++) {
-        
+    for (let i = 0; i < pollDivChildren.length; i++) { 
         const element = pollDivChildren[i];
-
         if(element.className == "poll_Id"){
-            let pollIdResult = element.innerText;
-            
-            const voteRef = await addDoc(collection(db, "votes"), {
-                voteBy: `${userUniqueKey}`,
-                poll_id: `${pollIdResult}`,
-                vote: `${getPollVoteValue()}`
-              });
-            console.log("Vote Registered: ", voteRef.id);
+            var pollIdResult = element.innerText;
         }
     }
 
+    
+    const validVoteRef = collection(db, "votes");
+    const validVoteQuery = query(validVoteRef, where("voteBy", "==", `${userUniqueKey}`), where("poll_id", "==", `${pollIdResult}`));
+    const querySnapshot = await getDocs(validVoteQuery);
+    console.log(querySnapshot.docs.length);
+
+    //check if user has a vote in the same poll
+    if (querySnapshot.docs.length > 0) {
+        console.log("VOTE DOES NOT COUNT USER ALREADY VOTED");
+    }else{
+        //then, gets the inner text value
+        const voteRef = await addDoc(collection(db, "votes"), {
+            voteBy: `${userUniqueKey}`,
+            poll_id: `${pollIdResult}`,
+            vote: `${getPollVoteValue()}`
+        });
+        console.log("Vote Registered: ", voteRef.id);
+    }
+    /*
+    // for (var i in querySnapshot.docs) {
+    //     const doc = querySnapshot.docs[i]
+    //     console.log(doc.data());
+    //     if(i > 0){
+    //         console.log("it has votes");
+    //         break;
+    //     }
+    //  }
+    *******************************************************************************************
+    SOLUTION BREAKING OUT OF A QUERYSNAPSHOT vvv
+    https://pretagteam.com/question/how-to-break-out-of-the-querysnapshot-foreach-loop-method
+    *******************************************************************************************
+    // querySnapshot.forEach((doc) => {
+    //     console.log(doc.data());
+    // });
+  
+    // if (querySnapshot.exists()) {
+    //     querySnapshot.forEach((doc) => {
+    //       console.log(doc.id, " => ", doc.data());
+    //     });
+        
+    // } else {
+    //     //then, gets the inner text value
+    //     const voteRef = await addDoc(collection(db, "votes"), {
+    //         voteBy: `${userUniqueKey}`,
+    //         poll_id: `${pollIdResult}`,
+    //         vote: `${getPollVoteValue()}`
+    //     });
+    //     console.log("Vote Registered: ", voteRef.id);
+    // 
+    */
  }
 
 function getPollVoteValue(){
