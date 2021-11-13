@@ -39,7 +39,6 @@ async function getSpecificPollResult(){
         const element = showResultsBtn[i];
         element.addEventListener("click", (event) => {
             event.preventDefault();
-            //console.log("aaaa");
             checkPollRes(polls, i);
         })
     }
@@ -47,6 +46,8 @@ async function getSpecificPollResult(){
 //now i have the specific div element
 async function checkPollRes(element, i){
     let pollDivChildren = element[i].children
+    let optArr = []
+    let voteArr = []
     
     //i dont like this [1]
     //search every opts in certain poll
@@ -56,6 +57,7 @@ async function checkPollRes(element, i){
 
         if (element.classList.contains("opt")) {
             console.log(element.children[1].innerText);
+            optArr.push(element.children[1].innerText)
         }
     }
 
@@ -72,12 +74,27 @@ async function checkPollRes(element, i){
     const checkVotesQuery = query(checkVotes, where("poll_id", "==", `${pollIdResult}`));
     const querySnapshot = await getDocs(checkVotesQuery);
 
-    let pollAllVotes = querySnapshot.docs.length;
-    //console.log(pollAllVotes);
-
+    //get every vote value
     for (let i = 0; i < querySnapshot.docs.length; i++) {
         const element = querySnapshot.docs[i];
-        console.log(element.data());
-        console.log(element.data().vote);
+        voteArr.push(element.data().vote)
+    }
+    console.log(voteArr);
+    console.log(optArr);
+    //loop through every possible answer
+    for (let j = 0; j < optArr.length; j++) {
+        const individualOpt = optArr[j];
+        let votecount = 0;
+        console.log("individual: "+individualOpt);
+        
+        //loop through every individual vote
+        //counts each vote value 
+        for (let i = 0; i < voteArr.length; i++) {
+            const invidualVote = voteArr[i];
+            if(invidualVote == individualOpt){
+                votecount++
+            }
+        }
+    console.log(votecount);
     }
 }
