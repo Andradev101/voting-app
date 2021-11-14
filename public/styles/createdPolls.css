@@ -14,11 +14,7 @@
 }
 .poll form{
     display: flex;
-    flex-direction: column-reverse;
-    /*
-        it is reversed because showPoll.js 
-        idk[idk.length- 1].insertAdjacentHTML("afterbegin", pollStructure)
-    */
+    flex-direction: column;
 }
 .createdPolls .content{
     display: flex;
@@ -27,7 +23,7 @@
     justify-content: center;
 }
 
-.results{
+.resultsDiv{
     /* height: 100px; */
     background-color: lightseagreen;
 }

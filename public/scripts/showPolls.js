@@ -40,8 +40,9 @@ querySnapshot.forEach((doc) => {
       <button type="button" class="showResultsBtn">Show Results</button>
       <button type="button" class="voteBtn" disabled>Vote</button>
     </form>
-    <div class="results">
-    <h3>Poll Results</h3>
+    <div class="resultsDiv">
+      <h3>Poll Results</h3>
+      <div class="results"></div>
     </div>
     <p>Poll ID:</p>
     <p class="poll_Id">${doc.id}</p>
@@ -63,7 +64,7 @@ querySnapshot.forEach((doc) => {
       <label for="${element}">${element}</label>
     </div>
     `
-    form[form.length- 1].insertAdjacentHTML("beforeend", pollStructure)
+    form[form.length- 1].insertAdjacentHTML("afterbegin", pollStructure)
     //always gets the last index and add the structure to the page
   })
 });

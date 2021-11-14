@@ -80,13 +80,16 @@ async function checkPollRes(element, i){
         const element = querySnapshot.docs[i];
         voteArr.push(element.data().vote)
     }
-    // console.log(voteArr);
-    // console.log(optArr);
+
+    let pollResDiv = pollDivChildren.item(2);//3rd child
+    let pollRes = pollResDiv.children.item(1);//2nd child of possRes
+    //clear options div, if there's any element inside it
+    pollRes.innerHTML = "";
+
     //loop through every possible answer
     for (let j = 0; j < optArr.length; j++) {
         const individualOpt = optArr[j];
         let votecount = 0;
-        //console.log("individual: "+individualOpt);
         
         //loop through every individual vote
         //counts each vote value 
@@ -96,18 +99,18 @@ async function checkPollRes(element, i){
                 votecount++
             }
         }
-    //console.log(votecount);
-    showPollRes(individualOpt, votecount, pollDivChildren, i)
+    showPollRes(individualOpt, votecount, pollDivChildren)
     }
 }
 
 //append every individual option and every individual votes
-async function showPollRes(individualOpt, votecount, pollDivChildren, i){
-    //3rd child
-    let pollResDiv = pollDivChildren.item(2);
+async function showPollRes(individualOpt, votecount, pollDivChildren){
+    let pollResDiv = pollDivChildren.item(2);//3rd child
+    let pollRes = pollResDiv.children.item(1);//2nd child of possRes
+    //pollRes.innerHTML = "";
     const element = 
     `
         <p>${individualOpt}: ${votecount}</p>
     `
-    pollResDiv.insertAdjacentHTML("beforeend", element);
+    pollRes.insertAdjacentHTML("beforeend", element);
 }
