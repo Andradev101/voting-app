@@ -40,6 +40,9 @@ querySnapshot.forEach((doc) => {
       <button type="button" class="showResultsBtn">Show Results</button>
       <button type="button" class="voteBtn" disabled>Vote</button>
     </form>
+    <div class="results">
+    <h3>Poll Results</h3>
+    </div>
     <p>Poll ID:</p>
     <p class="poll_Id">${doc.id}</p>
   </div>

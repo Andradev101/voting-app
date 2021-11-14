@@ -26,3 +26,8 @@
     align-items: stretch;
     justify-content: center;
 }
+
+.results{
+    /* height: 100px; */
+    background-color: lightseagreen;
+}

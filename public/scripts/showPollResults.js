@@ -43,20 +43,21 @@ async function getSpecificPollResult(){
         })
     }
 }
+
 //now i have the specific div element
 async function checkPollRes(element, i){
     let pollDivChildren = element[i].children
     let optArr = []
     let voteArr = []
     
-    //i dont like this [1]
     //search every opts in certain poll
     let pollOpts = element[i].children[1].children
     for (let i = 0; i < pollOpts.length; i++) {
         const element = pollOpts[i];
 
         if (element.classList.contains("opt")) {
-            console.log(element.children[1].innerText);
+             //i dont like this [1]
+            //console.log(element.children[1].innerText);
             optArr.push(element.children[1].innerText)
         }
     }
@@ -79,13 +80,13 @@ async function checkPollRes(element, i){
         const element = querySnapshot.docs[i];
         voteArr.push(element.data().vote)
     }
-    console.log(voteArr);
-    console.log(optArr);
+    // console.log(voteArr);
+    // console.log(optArr);
     //loop through every possible answer
     for (let j = 0; j < optArr.length; j++) {
         const individualOpt = optArr[j];
         let votecount = 0;
-        console.log("individual: "+individualOpt);
+        //console.log("individual: "+individualOpt);
         
         //loop through every individual vote
         //counts each vote value 
@@ -95,6 +96,18 @@ async function checkPollRes(element, i){
                 votecount++
             }
         }
-    console.log(votecount);
+    //console.log(votecount);
+    showPollRes(individualOpt, votecount, pollDivChildren, i)
     }
+}
+
+//append every individual option and every individual votes
+async function showPollRes(individualOpt, votecount, pollDivChildren, i){
+    //3rd child
+    let pollResDiv = pollDivChildren.item(2);
+    const element = 
+    `
+        <p>${individualOpt}: ${votecount}</p>
+    `
+    pollResDiv.insertAdjacentHTML("beforeend", element);
 }
