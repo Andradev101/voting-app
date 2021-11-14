@@ -84,6 +84,7 @@ async function checkPollRes(element, i){
     let pollResDiv = pollDivChildren.item(2);//3rd child
     let pollRes = pollResDiv.children.item(1);//2nd child of possRes
     //clear options div, if there's any element inside it
+    pollResDiv.style.display = "initial";
     pollRes.innerHTML = "";
 
     //loop through every possible answer

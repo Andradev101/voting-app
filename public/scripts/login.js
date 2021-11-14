@@ -39,7 +39,7 @@ async function login(){
     //search through users
     const docRef = doc(db, "users", `${userUniqueKey}`);
     const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
+    if (docSnap.exists() && userUniqueKey != "") {
         loginInput.setAttribute("disabled", "")
         for (let i = 0; i < voteBtn.length; i++) {
             const element = voteBtn[i];

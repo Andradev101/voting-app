@@ -111,6 +111,17 @@ async function createPoll(){
   } catch (e) {
     console.error("Error adding document: ", e);
   }
+
+  //clear fields
+  const createPollDiv = document.getElementsByClassName("createPoll")[0];
+  const inputs = createPollDiv.querySelectorAll("input");
+  for (let i = 0; i < inputs.length; i++) {
+    const element = inputs[i];
+    element.value = "";
+  }
+  //TO-DO
+  
+  //reload div after new poll added
 }
 
 //GET POLL OPTIONS

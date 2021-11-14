@@ -40,7 +40,7 @@ querySnapshot.forEach((doc) => {
       <button type="button" class="showResultsBtn">Show Results</button>
       <button type="button" class="voteBtn" disabled>Vote</button>
     </form>
-    <div class="resultsDiv">
+    <div class="resultsDiv" style="display:none">
       <h3>Poll Results</h3>
       <div class="results"></div>
     </div>

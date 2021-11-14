@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Quantico', sans-serif;
 }
 body{
     width: 100%;
@@ -13,19 +14,44 @@ body{
 h1{
     text-align: center;
 }
+button{
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+input{
+    font-size: 18px;
+    border: 0;
+    padding: 0;
+  }
 .userInteraction{
-    background-color: #b698ff;;
+    background-color: #b698ff;
     display: flex;
     align-items: flex-start;
     width: 100%;
+    padding: 3vw 0;
+    justify-content: center;
+    
 }
 .newUser,.idCheck, .createPoll, .loginBox{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 50%;
+    align-items: flex-start;
+    padding: 0 5%;
 }
-button{
-    max-width: 100px;
+.newUser button,.idCheck button, .createPoll button, .loginBox button{
+    height: 25px;
+    margin-top: 5px;
+    width: 100%;
+}
+.newUser button:hover,.idCheck button:hover, .createPoll button:hover, .loginBox button:hover{
+    background-color: teal;
+    color: white;
+}
+.inputBlock, .pollOpt{
+    width: 100%;
+}
+.newUser input,.idCheck input, .createPoll input, .loginBox input{
+    width: 100%;
 }

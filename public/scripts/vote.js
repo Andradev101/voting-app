@@ -62,7 +62,7 @@ let checkExist = setInterval(function() {
 
     //check if user has a vote in the same poll
     //if yes, vote is interrupted before going to the db
-    if (querySnapshot.docs.length > 0) {
+    if (querySnapshot.docs.length > 0 || userUniqueKey == "") { //needs improvement
         console.log("VOTE DOES NOT COUNT | USER ALREADY VOTED");
     }else{
         //if no, resgister the vote
