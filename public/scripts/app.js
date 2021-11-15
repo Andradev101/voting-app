@@ -77,7 +77,7 @@ async function createUser(){
   const querySnapshot = await getDocs(collection(db, "users"));
 
   querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
+    // console.log(doc.id, " => ", doc.data());
   });
 */
 
@@ -107,7 +107,7 @@ async function createPoll(){
       opts: options,
       createdBy: userUniqueKey
     });
-    console.log(`Copy this ID: ${pollsRef.id}`);
+    // console.log(`Copy this ID: ${pollsRef.id}`);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
@@ -131,7 +131,7 @@ async function getPollOpts(){
     let opt = document.querySelector(`#opt${i}`);
     pollOptArr.push(opt.children[1].value);
   }
-  console.log(pollOptArr);
+  // console.log(pollOptArr);
   return pollOptArr
 }
 
@@ -139,13 +139,13 @@ async function getPollOpts(){
 async function checkId(){
   //get id value
   let userUniqueKey = idToCheck.value;
-  console.log(userUniqueKey);
+  // console.log(userUniqueKey);
 
   //query by user and log it
   const pollsRef = collection(db, "polls");
   const queryByUser = query(pollsRef, where("createdBy", "==", `${userUniqueKey}`));
   const querySnapshot = await getDocs(queryByUser);
   querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
+    // console.log(doc.id, " => ", doc.data());
   });
 }

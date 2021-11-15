@@ -34,7 +34,7 @@ logoutBtn.addEventListener("click", logout)
 //Functions
 async function login(){
     let userUniqueKey = loginInput.value;
-    console.log(loginInput);
+    // console.log(loginInput);
 
     //search through users
     const docRef = doc(db, "users", `${userUniqueKey}`);
@@ -46,7 +46,7 @@ async function login(){
             element.removeAttribute("disabled", "")
         }
     } else {
-      console.log("No such document!");
+      // console.log("No such document!");
     }
 }
 

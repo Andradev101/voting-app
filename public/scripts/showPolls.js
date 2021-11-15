@@ -25,13 +25,11 @@ const db = getFirestore();
 // const getSnap = await getDoc(querySearch);
 // console.log(getSnap.data());
 const contentDiv = document.querySelector("body > div.createdPolls > div");
+const pollCounter = document.getElementsByClassName("pollCounter")[0];
 
 //get every poll doc, create a html structure to it, and append to the page
 const queryPolls = query(collection(db, "polls"));
 const querySnapshot = await getDocs(queryPolls);
-
-const pollCounter = document.getElementsByClassName("pollCounter")[0];
-
 pollCounter.innerHTML = `Polls created by users: ${querySnapshot.docs.length}`
 
 querySnapshot.forEach((doc) => {

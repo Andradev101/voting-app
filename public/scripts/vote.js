@@ -58,12 +58,12 @@ let checkExist = setInterval(function() {
     const validVoteRef = collection(db, "votes");
     const validVoteQuery = query(validVoteRef, where("voteBy", "==", `${userUniqueKey}`), where("poll_id", "==", `${pollIdResult}`));
     const querySnapshot = await getDocs(validVoteQuery);
-    console.log(querySnapshot.docs.length);
+    // console.log(querySnapshot.docs.length);
 
     //check if user has a vote in the same poll
     //if yes, vote is interrupted before going to the db
     if (querySnapshot.docs.length > 0 || userUniqueKey == "") { //needs improvement
-        console.log("VOTE DOES NOT COUNT | USER ALREADY VOTED");
+        // console.log("VOTE DOES NOT COUNT | USER ALREADY VOTED");
     }else{
         //if no, resgister the vote
         const voteRef = await addDoc(collection(db, "votes"), {
@@ -71,7 +71,7 @@ let checkExist = setInterval(function() {
             poll_id: `${pollIdResult}`,
             vote: `${getPollVoteValue()}`
         });
-        console.log("Vote Registered: ", voteRef.id);
+        // console.log("Vote Registered: ", voteRef.id);
     }
     /*
     // for (var i in querySnapshot.docs) {

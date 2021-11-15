@@ -22,26 +22,36 @@ button{
     cursor: pointer;
     background-color: #5a189a;
     border-bottom: 2px white dotted;
-    margin-bottom: 5px;
+    margin-top: 10px;
     padding: 10px 0;
     font-size: 18px;
-  }
+    transition: 0.1s ease-in-out;
+}
 button:disabled, button[disabled]{
     background-color: #59189a65;
     color: rgba(255, 255, 255, 0.344);
     border: none
-  }
+}
+button:hover{
+    background-color: teal;
+    color: white;
+}
+button:disabled:hover{
+    background-color: #59189a65;
+    color: rgba(255, 255, 255, 0.344);
+    border: none
+}
 input{
     font-size: 18px;
     border: 0;
     padding: 0;
     color: #272640;
-  }
+}
 input[type="text"]{
     padding-left: 10px;
-  }
+}
 #title{
-    font-size: clamp(1.7rem, -0.875rem + 8.333vw, 3.5rem);
+    font-size: clamp(2.7rem, -0.875rem + 8.333vw, 3.5rem);
     width: 100%;
     text-align: center;
 }
@@ -72,19 +82,17 @@ input[type="text"]{
     justify-content: center;
     align-items: flex-start;
     padding: 0 5%;
+    max-width: 30%;
+}
+.newUser p,.idCheck p, .createPoll p, .loginBox p{
+    text-align: justify;
+    font-size: 14px;
+    word-break: normal;
+    color: #ffffff7d;
 }
 .newUser button,.idCheck button, .createPoll button, .loginBox button{
     margin-top: 5px;
     width: 100%;
-}
-button:hover{
-    background-color: teal;
-    color: white;
-}
-button:disabled:hover{
-    background-color: #59189a65;
-    color: rgba(255, 255, 255, 0.344);
-    border: none
 }
 .inputBlock, .pollOpt{
     width: 100%;
@@ -117,5 +125,8 @@ button:disabled:hover{
         align-items: stretch;
         justify-content: center;
         margin-bottom: 25px;
+    }
+    .newUser,.idCheck, .createPoll, .loginBox{
+        max-width: initial;
     }
 }

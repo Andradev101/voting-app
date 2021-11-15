@@ -11,13 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Quantico&display=swap" rel="stylesheet">
   </head>
   <body>
-    <h1 id="title">😎 Polls-3000 😎</h1>
+    <h1 id="title">😎 Polls-101 😎</h1>
     <div class="shiaDoIt">
       <img src="/images/shiadoit.gif" alt="DO IT!">
     </div>
+    
     <div class="userInteraction"> 
       <div class="newUser">
         <h1>CREATE A NEW USER</h1>
+        <p>Here you will be assigned with a unique key. You will use this key to login in Polls-101.</p>
         <div class="inputBlock">
           <label>First Name</label>
           <input id="firstName">
@@ -32,7 +34,7 @@
     
       <div class="createPoll">
         <h1>CREATE A NEW POLL</h1>
-    
+        <p>Paste your assigned ID, then add a title to the poll and as many options you want by clicking the "Add Option" button.</p>
         <div class="inputBlock">
           <label>ID</label>
           <input placeholder="Paste your ID here" id="idNewPoll">
@@ -62,7 +64,7 @@
 
       <div class="loginBox">
         <label for="login"><h1>Login:</h1></label>
-        <p>You need to login in order to vote</p>
+        <p>You need to login in order to vote. Users can vote only once each poll.</p>
         <input type="text" name="login" id="login-loginBox" placeholder="Paste your ID here">
         <button>Login</button>
         <button>Logout</button>
@@ -71,7 +73,7 @@
     </div>
 
     <div class="createdPolls">
-      <h1 class="pollCounter">Polls created by users</h1>
+      <h1 class="pollCounter"></h1>
       <div class="content"></div>
     </div>
 
