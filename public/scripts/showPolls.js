@@ -36,9 +36,9 @@ querySnapshot.forEach((doc) => {
   <div class="poll">
     <h3>${pollTitle}</h3>
     <form action="#">
-    
-      <button type="button" class="showResultsBtn">Show Results</button>
+
       <button type="button" class="voteBtn" disabled>Vote</button>
+      <button type="button" class="showResultsBtn">Show Results</button>
     </form>
     <div class="resultsDiv" style="display:none">
       <h3>Poll Results</h3>

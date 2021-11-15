@@ -11,24 +11,24 @@
     display: flex;
     margin: 5px;
     padding: 5px;
-    background-color: violet;
+    background-color: #1b3a4b;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 20%;
-    min-width: 200px;
+    width: 250px;
 }
 .poll h3{
-    margin-bottom: 10px;
     word-break: break-all;
     text-transform: uppercase;
+}
+.poll .horizontalSeparator{
+    height: 1px;
+    width: 100%;
+    background-color: white;
 }
 .poll form{
     width: 100%;
     display: flex;
     flex-direction: column;
-}
-.poll form .opt{
-    background-color: red;
 }
 .poll form .opt label{
     text-transform: capitalize;
@@ -36,7 +36,6 @@
 }
 .poll button{
     width: 100%;
-    height: 25px;
 }
 .createdPolls .content{
     display: flex;
@@ -44,9 +43,14 @@
     align-items: stretch;
     justify-content: center;
 }
-
 .resultsDiv{
     /* height: 100px; */
-    background-color: lightseagreen;
+    background-color: #006466;
+}
+
+@media only screen and (max-width: 600px) {
+    .poll{
+        min-width: 100%;
+    }
 }
 

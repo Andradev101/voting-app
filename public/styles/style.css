@@ -3,8 +3,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Quantico', sans-serif;
+    color: white;
 }
 body{
+    background-color: #272640;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -18,20 +20,35 @@ button{
     border: 0;
     padding: 0;
     cursor: pointer;
+    background-color: #5a189a;
+    border-bottom: 2px white dotted;
+    margin-bottom: 5px;
+    padding: 10px 0;
+    font-size: 18px;
+  }
+button:disabled, button[disabled]{
+    background-color: #59189a65;
+    color: rgba(255, 255, 255, 0.344);
+    border: none
   }
 input{
     font-size: 18px;
     border: 0;
     padding: 0;
+    color: #272640;
+  }
+input[type="text"]{
+    padding-left: 10px;
   }
 .userInteraction{
-    background-color: #b698ff;
+    background-color: #272640;
+    box-shadow: 0px -2px 50px #0f0f11;
     display: flex;
     align-items: flex-start;
     width: 100%;
     padding: 3vw 0;
     justify-content: center;
-    
+    margin-bottom: 25px;
 }
 .newUser,.idCheck, .createPoll, .loginBox{
     display: flex;
@@ -41,11 +58,10 @@ input{
     padding: 0 5%;
 }
 .newUser button,.idCheck button, .createPoll button, .loginBox button{
-    height: 25px;
     margin-top: 5px;
     width: 100%;
 }
-.newUser button:hover,.idCheck button:hover, .createPoll button:hover, .loginBox button:hover{
+button:hover button:hover, button:hover, button:hover{
     background-color: teal;
     color: white;
 }
@@ -54,4 +70,20 @@ input{
 }
 .newUser input,.idCheck input, .createPoll input, .loginBox input{
     width: 100%;
+}
+.credits{
+    display: flex;
+}
+.credits a{
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+@media only screen and (max-width: 600px) {
+    .userInteraction{
+        box-shadow: 0px -2px 50px black;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        margin-bottom: 25px;
+    }
 }
