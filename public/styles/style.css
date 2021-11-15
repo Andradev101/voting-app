@@ -40,9 +40,25 @@ input{
 input[type="text"]{
     padding-left: 10px;
   }
+#title{
+    font-size: clamp(1.7rem, -0.875rem + 8.333vw, 3.5rem);
+    width: 100%;
+    text-align: center;
+}
+.shiaDoIt{
+    position: fixed;
+    transform: rotateY(180deg);
+    
+    top: 20vh;
+    left: 0px;
+    z-index: -100;
+}
+.shiaDoIt img{
+    opacity: 0.5;
+}
 .userInteraction{
     background-color: #272640;
-    box-shadow: 0px -2px 50px #0f0f11;
+    box-shadow: 0px 20px 20px #100a18;
     display: flex;
     align-items: flex-start;
     width: 100%;
@@ -61,9 +77,14 @@ input[type="text"]{
     margin-top: 5px;
     width: 100%;
 }
-button:hover button:hover, button:hover, button:hover{
+button:hover{
     background-color: teal;
     color: white;
+}
+button:disabled:hover{
+    background-color: #59189a65;
+    color: rgba(255, 255, 255, 0.344);
+    border: none
 }
 .inputBlock, .pollOpt{
     width: 100%;
@@ -78,9 +99,20 @@ button:hover button:hover, button:hover, button:hover{
     text-transform: uppercase;
     margin-left: 5px;
 }
+@media only screen and (max-width: 1330px) {
+    .shiaDoIt{ 
+        left: -60px;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .shiaDoIt{ 
+        display: none;
+        left: -30px;
+    }
+}
 @media only screen and (max-width: 600px) {
     .userInteraction{
-        box-shadow: 0px -2px 50px black;
+        box-shadow: 0px 20px 20px #100a18;
         flex-direction: column;
         align-items: stretch;
         justify-content: center;
