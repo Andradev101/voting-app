@@ -43,16 +43,37 @@ createPollBtn.addEventListener("click", createPoll);
 
 //CREATE USER
 async function createUser() {
+  
+  const newUserDiv = document.getElementsByClassName("newUser")[0];
+  const inputs = newUserDiv.getElementsByClassName("inputBlock");
+
+  function checkFields() {
+    for (let i = 0; i < inputs.length; i++) {
+      const element = inputs[i];
+      if (element.children[1].value.length < 1) {
+        return 0;
+      }
+    }
+    return 1;
+  }
   let userCreatedID = document.querySelector("#UserID");
-  try {
-    const docRef = await addDoc(collection(db, "users"), {
-      fName: fName.value,
-      lName: lName.value,
-    });
+  if (checkFields()) {
+    
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+        fName: fName.value,
+        lName: lName.value,
+      });
+      userCreatedID.innerHTML = "";
+      userCreatedID.innerHTML = `${docRef.id}`;
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
+  }else{
     userCreatedID.innerHTML = "";
-    userCreatedID.innerHTML = `${docRef.id}`;
-  } catch (e) {
-    console.error("Error adding document: ", e);
+    userCreatedID.innerHTML = "User creation failed, First and Last name must have a value.";
+    userCreatedID.style.color = "red";
   }
 }
 
