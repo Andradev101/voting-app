@@ -31,7 +31,6 @@
     flex-direction: column;
 }
 .poll form .opt label{
-    text-transform: capitalize;
     font-size: 18px;
 }
 .poll button{
