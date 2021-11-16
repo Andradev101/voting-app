@@ -8,7 +8,7 @@ function createNewField(){
     `
     <div id="opt${i++}" class="inputBlock pollOpt">
         <label>Poll Option #${i}</label>
-        <input type="text">
+        <input type="text" required>
     </div>
     `
     pollOpt.insertAdjacentHTML("beforeend", element);

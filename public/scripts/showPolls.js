@@ -57,8 +57,8 @@ querySnapshot.forEach((doc) => {
   //get me each opt
   let optArr = doc.data().opts;
   let form = document.querySelectorAll("body > div.createdPolls > div > div > form")
-  // console.log(form[form.length- 1]);
-  // console.log(optArr);
+  //  console.log(form[form.length- 1]);
+  //  console.log(optArr);
   optArr.forEach(element => {
     let pollStructure =
     `
