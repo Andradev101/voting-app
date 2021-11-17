@@ -85,7 +85,6 @@ input[type="text"]{
     justify-content: center;
     align-items: flex-start;
     padding: 0 20px;
-    margin: 0 10px;
     max-width: 30%;
 }
 .newUser p,.idCheck p, .createPoll p, .loginBox p{

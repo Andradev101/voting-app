@@ -66,6 +66,7 @@ async function createUser() {
       });
       userCreatedID.innerHTML = "";
       userCreatedID.innerHTML = `${docRef.id}`;
+      userCreatedID.style.color = "green";
     } catch (e) {
       console.error("Error adding document: ", e);
     }
